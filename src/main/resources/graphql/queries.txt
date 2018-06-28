@@ -1,0 +1,23 @@
+query {
+  findAllBooks {
+    id
+    isbn
+    title
+    pageCount
+    author {
+      firstName
+      lastName
+    }
+  }
+}
+
+mutation {
+  newBook(title: "Java: The Complete Reference, Tenth Edition", isbn: "1259589331", author: 1) {
+    id
+    title
+  }
+}
+
+mutation { updateBookPageCount(pageCount: 1344, id: 2) { id pageCount } }
+
+
