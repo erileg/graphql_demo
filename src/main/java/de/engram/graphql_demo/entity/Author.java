@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Data
-@NoArgsConstructor
 public class Author {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

@@ -11,7 +11,6 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Data
-@NoArgsConstructor
 public class Book {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
