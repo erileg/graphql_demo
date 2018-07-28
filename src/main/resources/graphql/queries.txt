@@ -18,6 +18,19 @@ mutation {
   }
 }
 
-mutation { updateBookPageCount(pageCount: 1344, id: 2) { id pageCount } }
+mutation {
+  newAuthor(firstName: "William", lastName: "Gibbson") {
+    id
+    firstName
+    lastName
+  }
+}
+
+mutation {
+  updateBookPageCount(pageCount: 1344, id: 2) {
+    id
+    pageCount
+  }
+}
 
 
