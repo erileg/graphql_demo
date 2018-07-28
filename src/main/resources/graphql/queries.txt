@@ -1,24 +1,4 @@
-query {
-  findAllBooks {
-    id
-    isbn
-    title
-    pageCount
-    author {
-      firstName
-      lastName
-    }
-  }
-}
-
-mutation {
-  newBook(title: "Java: The Complete Reference, Tenth Edition", isbn: "1259589331", author: 1) {
-    id
-    title
-  }
-}
-
-mutation {
+mutation newAuthor {
   newAuthor(firstName: "William", lastName: "Gibbson") {
     id
     firstName
@@ -26,11 +6,76 @@ mutation {
   }
 }
 
-mutation {
-  updateBookPageCount(pageCount: 1344, id: 2) {
+mutation newBook {
+  newBook(title: "Java: The Complete Reference, Tenth Edition", isbn: "1259589331", authors: [1, 2]) {
     id
+    title
+  }
+}
+
+mutation updatePageCount {
+  updateBookPageCount(pageCount: 1344, id: 3) {
+    id
+    isbn
     pageCount
   }
 }
 
+query findAllBooks {
+  findAllBooks {
+    id
+    title
+    isbn
+    pageCount
+    authors{
+      firstName
+      lastName
+    }
+  }
+}
 
+query findAllAuthors {
+  findAllBooks {
+    id
+    title
+    isbn
+    pageCount
+    authors{
+      firstName
+      lastName
+    }
+  }
+}
+
+query findAllStuff {
+  findAllAuthors {
+    firstName
+    lastName
+  }
+
+  findAllBooks {
+    id
+    title
+    isbn
+    pageCount
+    authors {
+      firstName
+      lastName
+    }
+  }
+}
+
+
+query findBooksWithFragment {
+  findAllBooks(first: 1) {
+    ...bookTitleAndMainAuthor
+  }
+}
+
+fragment bookTitleAndMainAuthor on Book {
+  title
+  authors {
+    lastName
+    firstName
+  }
+}
