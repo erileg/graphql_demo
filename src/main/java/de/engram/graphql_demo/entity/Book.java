@@ -1,13 +1,12 @@
 package de.engram.graphql_demo.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Data
@@ -18,8 +17,7 @@ public class Book {
 	private String title;
 	private String isbn;
 	private int pageCount;
-	@ManyToOne
-	@JoinColumn(name = "author_id", nullable = false, updatable = false)
+	@OneToOne
 	private Author author;
 
 	public Book(String title, String isbn, int pageCount, Author author) {
