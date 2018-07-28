@@ -9,6 +9,13 @@ import de.engram.graphql_demo.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
+
+import static java.util.stream.Collectors.toList;
+import static java.util.stream.StreamSupport.stream;
+
 @Component
 public class Mutation implements GraphQLMutationResolver {
 	@Autowired
@@ -22,9 +29,13 @@ public class Mutation implements GraphQLMutationResolver {
 		return authorRepository.save(author);
 	}
 
-	public Book newBook(String title, String isbn, Integer pageCount, Long authorId) {
-		Author author = authorRepository.findById(authorId).orElseThrow(() -> new EntityNotFoundException("The author could not be found", authorId));
-		Book book = new Book(title, isbn, pageCount != null ? pageCount : 0, author);
+	public Book newBook(String title, String isbn, Integer pageCount, List<Long> authorIds) {
+//		List<Author> authors = stream(authorRepository.findAll().spliterator(), false)
+//				.filter(author -> authorIds.contains(author.getId()))
+//				.collect(toList());
+		List<Author> authors = authorRepository.findByIds(authorIds);
+
+		Book book = new Book(title, isbn, pageCount != null ? pageCount : 0, authors);
 		return bookRepository.save(book);
 	}
 
