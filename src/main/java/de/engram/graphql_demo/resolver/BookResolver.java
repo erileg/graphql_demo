@@ -20,6 +20,8 @@ public class BookResolver implements GraphQLResolver<Book> {
 	private AuthorRepository authorRepository;
 
 	public List<Author> getAuthors(Book book) {
-		return authorRepository.findByIds(book.getAuthors().stream().map(Author::getId).collect(toList()));
+		return authorRepository.findByIds(book.getAuthors().stream()
+				.map(Author::getId)
+				.collect(toList()));
 	}
 }
