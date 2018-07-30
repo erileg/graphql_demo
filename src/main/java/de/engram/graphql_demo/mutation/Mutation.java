@@ -30,9 +30,6 @@ public class Mutation implements GraphQLMutationResolver {
 	}
 
 	public Book newBook(String title, String isbn, Integer pageCount, List<Long> authorIds) {
-//		List<Author> authors = stream(authorRepository.findAll().spliterator(), false)
-//				.filter(author -> authorIds.contains(author.getId()))
-//				.collect(toList());
 		List<Author> authors = authorRepository.findByIds(authorIds);
 
 		Book book = new Book(title, isbn, pageCount != null ? pageCount : 0, authors);
